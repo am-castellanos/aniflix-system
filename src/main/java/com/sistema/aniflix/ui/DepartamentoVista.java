@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Component
-public class DepartamentoVista /*extends Administrador*/ {
+public class DepartamentoVista {
     JPanel departamento;
     JTable tabla;
     JScrollPane sp;

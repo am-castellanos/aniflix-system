@@ -6,13 +6,8 @@ import com.sistema.aniflix.ui.Trabajador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+
 
 /**
  * @author amcc
@@ -82,7 +77,6 @@ public class Login extends JFrame {
 
                     case 1 -> {
 
-//                        Administrador administrador = new Administrador();
                         administrador.setUsuario(textField.getText());
                         administrador.ejecutar();
 
@@ -91,7 +85,6 @@ public class Login extends JFrame {
 
                     case 0 -> {
 
-//                        Trabajador trabajador = new Trabajador();
                         trabajador.setUsuario(textField.getText());
                         trabajador.ejecutar();
 
@@ -102,8 +95,6 @@ public class Login extends JFrame {
 
                         JOptionPane.showMessageDialog(null, "Datos incorrectos");
 
-//                        Login login = new Login();
-//                        login.remove(panel);
                         this.remove(panel);
                         ejecutar();
                     }
@@ -119,8 +110,4 @@ public class Login extends JFrame {
         inicio();
     }
 
-//    public static void main(String[] args) {
-//        Login login = new Login();
-//        login.ejecutar();
-//    }
 }

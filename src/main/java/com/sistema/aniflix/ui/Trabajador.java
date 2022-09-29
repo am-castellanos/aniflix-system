@@ -32,11 +32,9 @@ public class Trabajador extends JFrame {
         setBounds(50, 100, 1200, 500);
         setVisible(true);
 
-//        TrabajadorVista trabajadorVista = new TrabajadorVista();
         trabajadorVista.setUsuario(usuario);
         trabajadorVista.ejecutar();
 
-//        PerfilVista perfilVista = new PerfilVista();
         perfilVista.setUsuario(usuario);
         perfilVista.ejecutar();
 
@@ -57,8 +55,4 @@ public class Trabajador extends JFrame {
         this.usuario = usuario;
     }
 
-//    public static void main(String[] args){
-//        Trabajador tr = new Trabajador();
-//        tr.ejecutar();
-//    }
 }
