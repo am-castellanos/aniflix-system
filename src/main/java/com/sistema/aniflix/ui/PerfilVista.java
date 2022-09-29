@@ -5,7 +5,6 @@ import com.sistema.aniflix.dao.PerfilDAO;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.io.FileNotFoundException;
 
 @Component

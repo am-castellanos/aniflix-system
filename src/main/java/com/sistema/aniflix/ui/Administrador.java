@@ -49,26 +49,19 @@ public class Administrador extends JFrame {
         setBounds(50, 100, 1200, 500);
         setVisible(true);
 
-//        ServidorVista servidorVista = new ServidorVista();
         servidorVista.ejecutar();
 
-//        PlanVista planVista = new PlanVista();
         planVista.ejecutar();
 
-//        EmpleadoVista empleadoVista = new EmpleadoVista();
         empleadoVista.ejecutar();
 
-//        DepartamentoVista departamentoVista = new DepartamentoVista();
         departamentoVista.ejecutar();
 
-//        ESVista esVista = new ESVista();
         esVista.ejecutar();
 
-//        TrabajadorVista trabajadorVista = new TrabajadorVista();
         trabajadorVista.setUsuario(usuario);
         trabajadorVista.ejecutar();
 
-//        PerfilVista perfilVista = new PerfilVista();
         perfilVista.setUsuario(usuario);
         perfilVista.ejecutar();
 
@@ -93,9 +86,4 @@ public class Administrador extends JFrame {
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
-
-//    public static void main(String[] args){
-//        Administrador ad = new Administrador();
-//        ad.ejecutar();
-//    }
 }
