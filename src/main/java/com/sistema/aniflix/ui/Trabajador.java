@@ -1,13 +1,29 @@
 package com.sistema.aniflix.ui;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import javax.swing.*;
 
+@Component
 public class Trabajador extends JFrame {
     JTabbedPane ventana = new JTabbedPane();
     JPanel trabajador = new JPanel();
     JPanel perfil = new JPanel();
 
+    private final PerfilVista perfilVista;
+
+    private final TrabajadorVista trabajadorVista;
+
     private String usuario;
+
+    @Autowired
+    public Trabajador(final PerfilVista perfilVista,
+                      final TrabajadorVista trabajadorVista) {
+
+        this.perfilVista = perfilVista;
+        this.trabajadorVista = trabajadorVista;
+    }
 
     private void inicio(){
         setTitle("Empleado - " + usuario);
@@ -16,11 +32,11 @@ public class Trabajador extends JFrame {
         setBounds(50, 100, 1200, 500);
         setVisible(true);
 
-        TrabajadorVista trabajadorVista = new TrabajadorVista();
+//        TrabajadorVista trabajadorVista = new TrabajadorVista();
         trabajadorVista.setUsuario(usuario);
         trabajadorVista.ejecutar();
 
-        PerfilVista perfilVista = new PerfilVista();
+//        PerfilVista perfilVista = new PerfilVista();
         perfilVista.setUsuario(usuario);
         perfilVista.ejecutar();
 
@@ -41,8 +57,8 @@ public class Trabajador extends JFrame {
         this.usuario = usuario;
     }
 
-    public static void main(String[] args){
-        Trabajador tr = new Trabajador();
-        tr.ejecutar();
-    }
+//    public static void main(String[] args){
+//        Trabajador tr = new Trabajador();
+//        tr.ejecutar();
+//    }
 }

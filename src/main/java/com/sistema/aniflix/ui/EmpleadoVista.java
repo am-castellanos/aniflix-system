@@ -7,6 +7,8 @@ import com.itextpdf.text.DocumentException;
 import com.sistema.aniflix.dao.EmpleadoDAO;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.io.*;
@@ -15,19 +17,21 @@ import java.time.Instant;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class EmpleadoVista extends Administrador{
+@Component
+public class EmpleadoVista {
     JPanel empleado;
     JTable tabla;
     JScrollPane sp;
 
     private final EmpleadoDAO empleadoDAO;
 
-    public EmpleadoVista(){
+    @Autowired
+    public EmpleadoVista(final EmpleadoDAO empleadoDAO){
 
         this.empleado = new JPanel();
         this.tabla = new JTable();
         this.sp = new JScrollPane();
-        this.empleadoDAO = new EmpleadoDAO();
+        this.empleadoDAO = empleadoDAO;
     }
 
     private void botones(){

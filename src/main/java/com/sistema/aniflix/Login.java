@@ -1,12 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.sistema.aniflix;
 
-import com.sistema.aniflix.dao.Administracion;
+import com.sistema.aniflix.dao.AdministracionDAO;
 import com.sistema.aniflix.ui.Administrador;
 import com.sistema.aniflix.ui.Trabajador;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,25 +15,33 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 /**
- *
  * @author amcc
  */
-public class Login extends JFrame{
+@Component
+public class Login extends JFrame {
+
+    private final AdministracionDAO administracionDao;
+
+    private final Administrador administrador;
+
+    private final Trabajador trabajador;
+
     JPanel panel = new JPanel();
     JTextField textField = new JTextField();
     JPasswordField passwordField = new JPasswordField();
-    
-    //metodos
 
-//    private void Login(){
-//
-//        this.panel = new JPanel();
-//        this.textField = new JTextField();
-//        this.passwordField = new JPasswordField();
-//    }
+    @Autowired
+    public Login(final AdministracionDAO administracionDao,
+                 final Administrador administrador,
+                 final Trabajador trabajador) {
 
-    private void inicio(){
-        
+        this.administracionDao = administracionDao;
+        this.administrador = administrador;
+        this.trabajador = trabajador;
+    }
+
+    private void inicio() {
+
         setTitle("Login");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -51,33 +57,32 @@ public class Login extends JFrame{
         JLabel lbCorreo = new JLabel("Correo");
         lbCorreo.setBounds(70, 75, 80, 40);
         panel.add(lbCorreo);
-        
+
         textField.setBounds(160, 80, 150, 30);
         panel.add(textField);
-        
+
         JLabel lbContrasena = new JLabel("Contraseña");
         lbContrasena.setBounds(70, 175, 80, 40);
         panel.add(lbContrasena);
-        
+
         passwordField.setBounds(160, 180, 150, 30);
         panel.add(passwordField);
-        
+
         JButton bttnIngresar = new JButton("Ingresar");
         bttnIngresar.setBounds(140, 250, 100, 50);
         panel.add(bttnIngresar);
 
-        bttnIngresar.addActionListener(event ->{
+        bttnIngresar.addActionListener(event -> {
 
             try {
 
-                Administracion administracion = new Administracion();
-                int respuesta = administracion.filtro(textField.getText(), passwordField.getText());
+                int respuesta = administracionDao.filtro(textField.getText(), passwordField.getText());
 
-                switch (respuesta){
+                switch (respuesta) {
 
                     case 1 -> {
 
-                        Administrador administrador = new Administrador();
+//                        Administrador administrador = new Administrador();
                         administrador.setUsuario(textField.getText());
                         administrador.ejecutar();
 
@@ -86,7 +91,7 @@ public class Login extends JFrame{
 
                     case 0 -> {
 
-                        Trabajador trabajador = new Trabajador();
+//                        Trabajador trabajador = new Trabajador();
                         trabajador.setUsuario(textField.getText());
                         trabajador.ejecutar();
 
@@ -97,24 +102,25 @@ public class Login extends JFrame{
 
                         JOptionPane.showMessageDialog(null, "Datos incorrectos");
 
-                        Login login = new Login();
-                        login.remove(panel);
+//                        Login login = new Login();
+//                        login.remove(panel);
+                        this.remove(panel);
                         ejecutar();
                     }
                 }
 
-            } catch (Exception exception){
+            } catch (Exception exception) {
 
             }
         });
     }
-    
-    public void ejecutar(){
+
+    public void ejecutar() {
         inicio();
     }
-    
-    public static void main(String[] args) {
-        Login login = new Login();
-        login.ejecutar();
-    }
+
+//    public static void main(String[] args) {
+//        Login login = new Login();
+//        login.ejecutar();
+//    }
 }

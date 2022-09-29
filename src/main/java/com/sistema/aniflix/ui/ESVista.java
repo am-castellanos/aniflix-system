@@ -2,22 +2,27 @@ package com.sistema.aniflix.ui;
 
 import com.itextpdf.text.DocumentException;
 import com.sistema.aniflix.dao.ESDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.io.*;
-public class ESVista extends Administrador{
+
+@Component
+public class ESVista {
     JPanel es;
     JTable tabla;
     JScrollPane sp;
 
     private final ESDAO esDAO;
 
-    public ESVista() {
+    @Autowired
+    public ESVista(final ESDAO esDAO) {
 
         this.es = new JPanel();
         this.tabla = new JTable();
         this.sp = new JScrollPane();
-        this.esDAO = new ESDAO();
+        this.esDAO = esDAO;
     }
 
     private void botones(){

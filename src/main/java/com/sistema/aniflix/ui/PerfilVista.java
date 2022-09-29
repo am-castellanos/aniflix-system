@@ -2,11 +2,13 @@ package com.sistema.aniflix.ui;
 
 import com.itextpdf.text.DocumentException;
 import com.sistema.aniflix.dao.PerfilDAO;
+import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.io.FileNotFoundException;
 
+@Component
 public class PerfilVista {
     JPanel perfil;
     JTable info;
@@ -17,13 +19,13 @@ public class PerfilVista {
 
     private String usuario;
 
-    public PerfilVista() {
+    public PerfilVista(final PerfilDAO perfilDAO) {
 
         this.perfil = new JPanel();
         this.info = new JTable();
         this.entradaSalida = new JTable();
         this.sp = new JScrollPane();
-        this.perfilDAO = new PerfilDAO();
+        this.perfilDAO = perfilDAO;
     }
 
     private void info(){

@@ -4,7 +4,10 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -16,18 +19,20 @@ import java.util.ArrayList;
 
 import static java.util.Objects.nonNull;
 
+@Repository
 public class EmpleadoDAO {
+
+    private final DataSource dataSource;
 
     private PreparedStatement ps;
     private ResultSet rs;
     private Connection con;
-    private Conexion conectar;
     private Object datos[][];
 
-    public EmpleadoDAO() {
+    @Autowired
+    public EmpleadoDAO(final DataSource dataSource) {
 
-        this.conectar = new Conexion();
-
+        this.dataSource = dataSource;
     }
 
     public Object[][] listar_tabla() {
@@ -36,7 +41,7 @@ public class EmpleadoDAO {
 
         try {
             int x = 0;
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -51,7 +56,7 @@ public class EmpleadoDAO {
 
             datos = new Object[x][10];
             x = 0;
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -103,7 +108,7 @@ public class EmpleadoDAO {
                 " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
 
             ps.setInt(1, cui);
@@ -148,7 +153,7 @@ public class EmpleadoDAO {
         final var sql = "update empleado set cui = ?, nombre = ?, salario = ?, departamento = ?, correo = ?, contrasena = ?, fecha_ingreso = ?, fecha_egreso = ?, rol = ? where id_empleado = ?";
 
         try {
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, cui);
             ps.setString(2, nombre);
@@ -184,7 +189,7 @@ public class EmpleadoDAO {
         final var sql = "delete from empleado where id_empleado = ?";
 
         try {
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, id_empleado);
             ps.executeUpdate();
@@ -218,7 +223,7 @@ public class EmpleadoDAO {
 
         final var sql = "select * from empleado";
         try {
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
 
