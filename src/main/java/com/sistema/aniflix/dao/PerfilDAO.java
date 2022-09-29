@@ -4,7 +4,10 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -14,20 +17,22 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
+@Repository
 public class PerfilDAO {
+
+    private final DataSource dataSource;
+
     private PreparedStatement ps;
     private ResultSet rs;
     private Connection con;
-    private Conexion conectar;
     private Object datos[][];
     private Object entradaSalida[][];
 
-    public PerfilDAO() {
+    @Autowired
+    public PerfilDAO(final DataSource dataSource) {
 
-        this.conectar = new Conexion();
-
+        this.dataSource = dataSource;
     }
 
     public Object[][] listarTabla(final String correo) {
@@ -36,7 +41,7 @@ public class PerfilDAO {
 
         try {
             int x = 0;
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, correo);
 
@@ -48,7 +53,7 @@ public class PerfilDAO {
 
             datos = new Object[x][10];
             x = 0;
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, correo);
 
@@ -97,7 +102,7 @@ public class PerfilDAO {
 
         try {
             int x = 0;
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, correo);
 
@@ -109,7 +114,7 @@ public class PerfilDAO {
 
             datos = new Object[x][4];
             x = 0;
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, correo);
 
@@ -148,7 +153,7 @@ public class PerfilDAO {
         final var sql = "update empleado set contrasena = ? where correo = ?";
 
         try {
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, contrasena);
             ps.setString(2, correo);
@@ -188,7 +193,7 @@ public class PerfilDAO {
                 "    inner JOIN evento ev on ee.evento_id = ev.id_evento WHERE correo = ?";
 
         try {
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, correo);
 

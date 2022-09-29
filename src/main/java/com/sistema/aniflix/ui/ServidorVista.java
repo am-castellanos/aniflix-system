@@ -9,6 +9,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.itextpdf.text.DocumentException;
 import com.sistema.aniflix.dao.ServidorDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.text.ParseException;
@@ -20,19 +22,21 @@ import javax.swing.*;
  *
  * @author amcc
  */
-public class ServidorVista extends Administrador{
+@Component
+public class ServidorVista {
     JPanel servidor;
     JTable tabla;
     JScrollPane sp;
 
     private final ServidorDAO servidorDAO;
 
-    public ServidorVista() {
+    @Autowired
+    public ServidorVista(final ServidorDAO servidorDAO) {
 
         this.servidor = new JPanel();
         this.tabla = new JTable();
         this.sp = new JScrollPane();
-        this.servidorDAO = new ServidorDAO();
+        this.servidorDAO = servidorDAO;
     }
 
     private void botones(){

@@ -8,7 +8,10 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -24,17 +27,20 @@ import java.util.ArrayList;
  *
  * @author amcc
  */
+@Repository
 public class PlanDAO {
+
+    private final DataSource dataSource;
+
     private PreparedStatement ps;
     private ResultSet rs;
     private Connection con;
-    private Conexion conectar;
     private Object datos[][];
 
-    public PlanDAO() {
+    @Autowired
+    public PlanDAO(final DataSource dataSource) {
 
-        this.conectar = new Conexion();
-
+        this.dataSource = dataSource;
     }
 
     public Object[][] listar_tabla(){
@@ -43,7 +49,7 @@ public class PlanDAO {
 
         try{
             int x = 0;
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -58,7 +64,7 @@ public class PlanDAO {
 
             datos = new Object[x][4];
             x = 0;
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -96,7 +102,7 @@ public class PlanDAO {
         final var sql = "insert into plan(plan, precio_usd, estado) values(?, ?, ?)";
 
         try{
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, plan);
             ps.setInt(2, precio_usd);
@@ -124,7 +130,7 @@ public class PlanDAO {
         final var sql = "update plan set plan = ?, precio_usd = ?, estado = ? where id_plan = ?";
 
         try{
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, plan);
             ps.setInt(2, precio_usd);
@@ -153,7 +159,7 @@ public class PlanDAO {
         final var sql = "delete from plan where id_plan = ?";
 
         try{
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, id_plan);
             ps.executeUpdate();
@@ -189,7 +195,7 @@ public class PlanDAO {
 
         final var sql = "select * from plan";
         try {
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
 

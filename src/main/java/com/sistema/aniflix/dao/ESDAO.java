@@ -4,7 +4,10 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -16,29 +19,32 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+@Repository
 public class ESDAO {
+
+    private final DataSource dataSource;
+
     private PreparedStatement ps;
     private ResultSet rs;
     private Connection con;
-    private Conexion conectar;
     private Object datos[][];
 
-    public ESDAO() {
+    @Autowired
+    public ESDAO(final DataSource dataSource) {
 
-        this.conectar = new Conexion();
-
+        this.dataSource = dataSource;
     }
 
     public Object[][] listar_tabla() {
 
-        final var sql = "SELECT e.nombre, e.correo, ev.tipo, ee.fecha\n" +
-                "FROM `empleado_evento` ee\n" +
-                "\tINNER JOIN empleado e on ee.empleado_id = e.id_empleado\n" +
-                "    inner JOIN evento ev on ee.evento_id = ev.id_evento;";
+        final var sql = "SELECT e.nombre, e.correo, ev.tipo, ee.fecha " +
+                "FROM empleado_evento ee" +
+                " INNER JOIN empleado e on ee.empleado_id = e.id_empleado " +
+                " inner JOIN evento ev on ee.evento_id = ev.id_evento";
 
         try {
             int x = 0;
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -53,7 +59,7 @@ public class ESDAO {
 
             datos = new Object[x][4];
             x = 0;
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -96,12 +102,12 @@ public class ESDAO {
         docto.add(parrafo);
         docto.add(new Paragraph("\n"));
 
-        final var sql = "SELECT e.nombre, e.correo, ev.tipo, ee.fecha\n" +
-                "FROM `empleado_evento` ee\n" +
-                "\tINNER JOIN empleado e on ee.empleado_id = e.id_empleado\n" +
-                "    inner JOIN evento ev on ee.evento_id = ev.id_evento;";
+        final var sql = "SELECT e.nombre, e.correo, ev.tipo, ee.fecha " +
+                "FROM `empleado_evento` ee " +
+                " INNER JOIN empleado e on ee.empleado_id = e.id_empleado " +
+                " inner JOIN evento ev on ee.evento_id = ev.id_evento";
         try {
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
 

@@ -9,10 +9,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.itextpdf.text.DocumentException;
 import com.sistema.aniflix.dao.PlanDAO;
+import org.springframework.stereotype.Component;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -22,19 +21,20 @@ import java.util.logging.Logger;
  *
  * @author amcc
  */
-public class PlanVista extends Administrador{
+@Component
+public class PlanVista {
     JPanel plan;
     JTable tabla;
     JScrollPane sp;
 
     private final PlanDAO planDAO;
 
-    public PlanVista(){
+    public PlanVista(final PlanDAO planDAO){
 
         this.plan = new JPanel();
         this.tabla = new JTable();
         this.sp = new JScrollPane();
-        this.planDAO = new PlanDAO();
+        this.planDAO = planDAO;
     }
 
     private void botones(){

@@ -2,6 +2,7 @@ package com.sistema.aniflix.ui;
 
 import com.sistema.aniflix.dao.TrabajadorDAO;
 import com.sistema.aniflix.domain.type.TipoEvento;
+import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +10,7 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
+@Component
 public class TrabajadorVista extends JFrame {
     JPanel trabajador = new JPanel();
 
@@ -21,12 +23,13 @@ public class TrabajadorVista extends JFrame {
     private final TrabajadorDAO trabajadorDao;
     private final ESVista esVista;
 
-    public TrabajadorVista() {
+    public TrabajadorVista(final TrabajadorDAO trabajadorDao,
+                           final ESVista esVista) {
 
         this.lbTimer = new JLabel("");
         this.timer = new Timer(1000, event -> tick());
-        this.trabajadorDao = new TrabajadorDAO();
-        this.esVista = new ESVista();
+        this.trabajadorDao = trabajadorDao;
+        this.esVista = esVista;
     }
 
     public void ejecutar() {

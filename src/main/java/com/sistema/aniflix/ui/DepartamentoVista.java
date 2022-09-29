@@ -5,6 +5,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.itextpdf.text.DocumentException;
 import com.sistema.aniflix.dao.DepartamentoDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.io.*;
@@ -12,19 +14,21 @@ import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DepartamentoVista extends Administrador{
+@Component
+public class DepartamentoVista /*extends Administrador*/ {
     JPanel departamento;
     JTable tabla;
     JScrollPane sp;
 
     private final DepartamentoDAO departamentoDAO;
 
-    public DepartamentoVista(){
+    @Autowired
+    public DepartamentoVista(final DepartamentoDAO departamentoDAO){
 
         this.departamento = new JPanel();
         this.tabla = new JTable();
         this.sp = new JScrollPane();
-        this.departamentoDAO = new DepartamentoDAO();
+        this.departamentoDAO = departamentoDAO;
     }
 
     private void botones(){

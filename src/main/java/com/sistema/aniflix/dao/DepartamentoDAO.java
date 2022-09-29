@@ -4,7 +4,10 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -16,16 +19,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+@Repository
 public class DepartamentoDAO {
+
+    private final DataSource dataSource;
+
     private PreparedStatement ps;
     private ResultSet rs;
     private Connection con;
-    private Conexion conectar;
     private Object datos[][];
 
-    public DepartamentoDAO() {
+    public DepartamentoDAO(final DataSource dataSource) {
 
-        this.conectar = new Conexion();
+        this.dataSource = dataSource;
 
     }
 
@@ -35,7 +41,7 @@ public class DepartamentoDAO {
 
         try {
             int x = 0;
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -50,7 +56,7 @@ public class DepartamentoDAO {
 
             datos = new Object[x][3];
             x = 0;
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -85,7 +91,7 @@ public class DepartamentoDAO {
         final var sql = "insert into area_laboral (departamento, estado) values(?, ?)";
 
         try {
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, departamento);
             ps.setInt(2, estado);
@@ -110,7 +116,7 @@ public class DepartamentoDAO {
         final var sql = "update area_laboral set departamento = ?, estado = ? where id_departamento = ?";
 
         try {
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, departamento);
             ps.setInt(2, estado);
@@ -136,7 +142,7 @@ public class DepartamentoDAO {
         final var sql = "delete from area_laboral where id_departamento = ?";
 
         try {
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, id_departamento);
             ps.executeUpdate();
@@ -170,7 +176,7 @@ public class DepartamentoDAO {
 
         final var sql = "select * from area_laboral";
         try {
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
 

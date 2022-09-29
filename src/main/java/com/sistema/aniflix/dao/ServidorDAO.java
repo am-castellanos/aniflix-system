@@ -8,7 +8,10 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -24,17 +27,18 @@ import java.util.ArrayList;
  *
  * @author amcc
  */
+@Repository
 public class ServidorDAO {
+
+    private final DataSource dataSource;
+
     private PreparedStatement ps;
     private ResultSet rs;
     private Connection con;
-    private Conexion conectar;
     private Object datos[][];
 
-    public ServidorDAO() {
-
-        this.conectar = new Conexion();
-
+    public ServidorDAO(final DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     public Object[][] listar_tabla() {
@@ -43,7 +47,7 @@ public class ServidorDAO {
 
         try {
             int x = 0;
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -58,7 +62,7 @@ public class ServidorDAO {
 
             datos = new Object[x][3];
             x = 0;
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -93,7 +97,7 @@ public class ServidorDAO {
         final var sql = "insert into servidor (servidor, estado) values(?, ?)";
 
         try {
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, servidor);
             ps.setInt(2, estado);
@@ -118,7 +122,7 @@ public class ServidorDAO {
         final var sql = "update servidor set servidor = ?, estado = ? where id_servidor = ?";
 
         try {
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, servidor);
             ps.setInt(2, estado);
@@ -144,7 +148,7 @@ public class ServidorDAO {
         final var sql = "delete from servidor where id_servidor = ?";
 
         try {
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, id_servidor);
             ps.executeUpdate();
@@ -178,7 +182,7 @@ public class ServidorDAO {
 
         final var sql = "select * from servidor";
         try {
-            con = conectar.conectar();
+            con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
 

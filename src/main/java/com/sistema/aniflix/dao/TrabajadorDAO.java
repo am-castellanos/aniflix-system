@@ -1,7 +1,10 @@
 package com.sistema.aniflix.dao;
 
 import com.sistema.aniflix.domain.type.TipoEvento;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +13,7 @@ import java.time.Instant;
 
 import static java.util.Objects.nonNull;
 
+@Repository
 public class TrabajadorDAO {
 
     private static final String AGREGAR_EVENTO = "insert into empleado_evento (empleado_id, evento_id, fecha) " +
@@ -19,18 +23,12 @@ public class TrabajadorDAO {
 
     private static final String OBTENER_TIPO = "select id_evento from evento where tipo = ?";
 
-//    SELECT e.nombre, e.correo, ev.tipo, ee.fecha
-//    FROM `empleado_evento` ee
-//    INNER JOIN empleado e on ee.empleado_id = e.id_empleado
-//    inner JOIN evento ev on ee.evento_id = ev.id_evento
-//    where e.correo = ?
+    private final DataSource dataSource;
 
+    @Autowired
+    public TrabajadorDAO(final DataSource dataSource) {
 
-    private final Conexion conexion;
-
-    public TrabajadorDAO() {
-
-        this.conexion = new Conexion();
+        this.dataSource = dataSource;
     }
 
     public boolean guardarEvento(final String usuario, final TipoEvento tipoEvento) {
@@ -47,7 +45,7 @@ public class TrabajadorDAO {
                 return false;
             }
 
-            cn = conexion.conectar();
+            cn = dataSource.getConnection();
             ps = cn.prepareStatement(AGREGAR_EVENTO);
             ps.setLong(1, empleadoId);
             ps.setLong(2, eventoId);
@@ -88,7 +86,7 @@ public class TrabajadorDAO {
 
         try {
 
-            cn = conexion.conectar();
+            cn = dataSource.getConnection();
             ps = cn.prepareStatement(OBTENER_EMPLEADO_ID);
             ps.setString(1, correo);
 
@@ -135,7 +133,7 @@ public class TrabajadorDAO {
 
         try {
 
-            cn = conexion.conectar();
+            cn = dataSource.getConnection();
             ps = cn.prepareStatement(OBTENER_TIPO);
             ps.setString(1, tipoEvento.getValor());
 

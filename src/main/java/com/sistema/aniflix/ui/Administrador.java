@@ -1,8 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.sistema.aniflix.ui;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 
@@ -10,15 +9,39 @@ import javax.swing.*;
  *
  * @author amcc
  */
-public class Administrador extends JFrame{            
+@Component
+public class Administrador extends JFrame {
+
+    private final DepartamentoVista departamentoVista;
+    private final ServidorVista servidorVista;
+    private final EmpleadoVista empleadoVista;
+    private final ESVista esVista;
+    private final PerfilVista perfilVista;
+    private final PlanVista planVista;
+    private final TrabajadorVista trabajadorVista;
+
     JTabbedPane ventana = new JTabbedPane();
-    JPanel servidor = new JPanel();
-    JPanel plan = new JPanel();
-    JPanel empleado = new JPanel();
-    JPanel departamento = new JPanel();
 
     private String usuario;
-    
+
+    @Autowired
+    public Administrador(final DepartamentoVista departamentoVista,
+                         final ServidorVista servidorVista,
+                         final EmpleadoVista empleadoVista,
+                         final ESVista esVista,
+                         final PerfilVista perfilVista,
+                         final PlanVista planVista,
+                         final TrabajadorVista trabajadorVista) {
+
+        this.departamentoVista = departamentoVista;
+        this.servidorVista = servidorVista;
+        this.empleadoVista = empleadoVista;
+        this.esVista = esVista;
+        this.perfilVista = perfilVista;
+        this.planVista = planVista;
+        this.trabajadorVista = trabajadorVista;
+    }
+
     private void inicio(){
         setTitle("Administracion - " + usuario);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -26,26 +49,26 @@ public class Administrador extends JFrame{
         setBounds(50, 100, 1200, 500);
         setVisible(true);
 
-        ServidorVista servidorVista = new ServidorVista();
+//        ServidorVista servidorVista = new ServidorVista();
         servidorVista.ejecutar();
 
-        PlanVista planVista = new PlanVista();
+//        PlanVista planVista = new PlanVista();
         planVista.ejecutar();
 
-        EmpleadoVista empleadoVista = new EmpleadoVista();
+//        EmpleadoVista empleadoVista = new EmpleadoVista();
         empleadoVista.ejecutar();
 
-        DepartamentoVista departamentoVista = new DepartamentoVista();
+//        DepartamentoVista departamentoVista = new DepartamentoVista();
         departamentoVista.ejecutar();
 
-        ESVista esVista = new ESVista();
+//        ESVista esVista = new ESVista();
         esVista.ejecutar();
 
-        TrabajadorVista trabajadorVista = new TrabajadorVista();
+//        TrabajadorVista trabajadorVista = new TrabajadorVista();
         trabajadorVista.setUsuario(usuario);
         trabajadorVista.ejecutar();
 
-        PerfilVista perfilVista = new PerfilVista();
+//        PerfilVista perfilVista = new PerfilVista();
         perfilVista.setUsuario(usuario);
         perfilVista.ejecutar();
 
@@ -71,8 +94,8 @@ public class Administrador extends JFrame{
         this.usuario = usuario;
     }
 
-    public static void main(String[] args){
-        Administrador ad = new Administrador();
-        ad.ejecutar();
-    }
+//    public static void main(String[] args){
+//        Administrador ad = new Administrador();
+//        ad.ejecutar();
+//    }
 }
