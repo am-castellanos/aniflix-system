@@ -42,11 +42,11 @@ public class ESVista {
             }
         });
 
-        JButton listar = new JButton("Listar");
-        listar.setBounds(870, 100, 300, 50);
-        es.add(listar);
+        JButton refrescar = new JButton("Refrescar");
+        refrescar.setBounds(870, 100, 300, 50);
+        es.add(refrescar);
 
-        listar.addActionListener(event -> actualizarTabla());
+        refrescar.addActionListener(event -> actualizarTabla());
     }
 
     private void tabla(){

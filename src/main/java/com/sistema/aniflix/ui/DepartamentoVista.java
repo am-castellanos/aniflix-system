@@ -104,7 +104,7 @@ public class DepartamentoVista {
 
     private void crear(){
         JFrame frameDepartamento = new JFrame();
-        frameDepartamento.setTitle("Nuevo Servidor");
+        frameDepartamento.setTitle("Nuevo Departamento");
         frameDepartamento.setLocationRelativeTo(null);
         frameDepartamento.setBounds(50, 175, 430, 400);
         frameDepartamento.setVisible(true);
@@ -114,7 +114,7 @@ public class DepartamentoVista {
         frameDepartamento.add(p1);
 
         JLabel lbDepartamento = new JLabel("Departamento");
-        lbDepartamento.setBounds(50, 20, 80, 50);
+        lbDepartamento.setBounds(50, 20, 100, 50);
         p1.add(lbDepartamento);
 
         JTextField edDepartamento = new JTextField();
