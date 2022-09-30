@@ -83,11 +83,6 @@ public class PerfilVista {
                 throw new RuntimeException();
             }
         });
-
-        JButton cerrarSesion = new JButton("Cerrar Sesion");
-        cerrarSesion.setBounds(870, 270, 300, 50);
-        perfil.add(cerrarSesion);
-
     }
 
     private void actualizar(){

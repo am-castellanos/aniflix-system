@@ -16,9 +16,7 @@ public class Administrador extends JFrame {
     private final ServidorVista servidorVista;
     private final EmpleadoVista empleadoVista;
     private final ESVista esVista;
-    private final PerfilVista perfilVista;
     private final PlanVista planVista;
-    private final TrabajadorVista trabajadorVista;
 
     JTabbedPane ventana = new JTabbedPane();
 
@@ -29,17 +27,13 @@ public class Administrador extends JFrame {
                          final ServidorVista servidorVista,
                          final EmpleadoVista empleadoVista,
                          final ESVista esVista,
-                         final PerfilVista perfilVista,
-                         final PlanVista planVista,
-                         final TrabajadorVista trabajadorVista) {
+                         final PlanVista planVista) {
 
         this.departamentoVista = departamentoVista;
         this.servidorVista = servidorVista;
         this.empleadoVista = empleadoVista;
         this.esVista = esVista;
-        this.perfilVista = perfilVista;
         this.planVista = planVista;
-        this.trabajadorVista = trabajadorVista;
     }
 
     private void inicio(){
@@ -59,14 +53,6 @@ public class Administrador extends JFrame {
 
         esVista.ejecutar();
 
-        trabajadorVista.setUsuario(usuario);
-        trabajadorVista.ejecutar();
-
-        perfilVista.setUsuario(usuario);
-        perfilVista.ejecutar();
-
-        ventana.addTab("Jornada", trabajadorVista.trabajador);
-        ventana.addTab("Perfil", perfilVista.perfil);
         ventana.addTab("Empleados", empleadoVista.empleado);
         ventana.addTab("Entradas / Salidas", esVista.es);
         ventana.addTab("Departamentos", departamentoVista.departamento);
