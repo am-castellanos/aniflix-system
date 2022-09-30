@@ -227,7 +227,7 @@ public class DepartamentoVista {
         p1.add(edID);
 
         JLabel lbDepartamento = new JLabel("Departamento");
-        lbDepartamento.setBounds(50, 80, 80, 50);
+        lbDepartamento.setBounds(50, 80, 100, 50);
         p1.add(lbDepartamento);
 
         JTextField edDepartamento = new JTextField();

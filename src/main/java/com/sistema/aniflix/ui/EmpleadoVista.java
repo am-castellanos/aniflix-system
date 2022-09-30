@@ -287,7 +287,7 @@ public class EmpleadoVista {
         JFrame frameEmpleado = new JFrame();
         frameEmpleado.setTitle("Actualizar Empleado");
         frameEmpleado.setLocationRelativeTo(null);
-        frameEmpleado.setBounds(50, 175, 430, 800);
+        frameEmpleado.setBounds(50, 175, 430, 500);
         frameEmpleado.setVisible(true);
 
         JPanel p1 = new JPanel();
@@ -295,7 +295,7 @@ public class EmpleadoVista {
         frameEmpleado.add(p1);
 
         JLabel lbID = new JLabel("ID");
-        lbID.setBounds(50, 20, 80, 50);
+        lbID.setBounds(50, 10, 80, 50);
         p1.add(lbID);
 
         JTextField edID = new JTextField();
@@ -305,94 +305,94 @@ public class EmpleadoVista {
         p1.add(edID);
 
         JLabel lbCUI = new JLabel("CUI");
-        lbCUI.setBounds(50, 80, 80, 50);
+        lbCUI.setBounds(50, 50, 80, 50);
         p1.add(lbCUI);
 
         JTextField edCUI = new JTextField();
-        edCUI.setBounds(150, 95, 200, 20);
+        edCUI.setBounds(150, 65, 200, 20);
         edCUI.setText(tabla.getValueAt(tabla.getSelectedRow(), 1)+"");
         p1.add(edCUI);
 
         JLabel lbNombre = new JLabel("Nombre");
-        lbNombre.setBounds(50, 140, 80, 50);
+        lbNombre.setBounds(50, 90, 80, 50);
         p1.add(lbNombre);
 
         JTextField edNombre = new JTextField();
-        edNombre.setBounds(150, 155, 200, 20);
+        edNombre.setBounds(150, 105, 200, 20);
         edNombre.setText(tabla.getValueAt(tabla.getSelectedRow(), 2)+"");
         p1.add(edNombre);
 
         JLabel lbSalario = new JLabel("Salario");
-        lbSalario.setBounds(50, 200, 80, 50);
+        lbSalario.setBounds(50, 130, 80, 50);
         p1.add(lbSalario);
 
         JTextField edSalario = new JTextField();
-        edSalario.setBounds(150, 215, 200, 20);
+        edSalario.setBounds(150, 145, 200, 20);
         edSalario.setText(tabla.getValueAt(tabla.getSelectedRow(), 3)+"");
         p1.add(edSalario);
 
         JLabel lbDepartamento = new JLabel("Departamento");
-        lbDepartamento.setBounds(50, 260, 80, 50);
+        lbDepartamento.setBounds(50, 170, 100, 50);
         p1.add(lbDepartamento);
 
         JTextField edDepartamento = new JTextField();
-        edDepartamento.setBounds(150, 275, 200, 20);
+        edDepartamento.setBounds(150, 185, 200, 20);
         edDepartamento.setText(tabla.getValueAt(tabla.getSelectedRow(), 4)+"");
         p1.add(edDepartamento);
 
         JLabel lbCorreo = new JLabel("Correo");
-        lbCorreo.setBounds(50, 320, 80, 50);
+        lbCorreo.setBounds(50, 210, 80, 50);
         p1.add(lbCorreo);
 
         JTextField edCorreo = new JTextField();
-        edCorreo.setBounds(150, 335, 200, 20);
+        edCorreo.setBounds(150, 225, 200, 20);
         edCorreo.setText(tabla.getValueAt(tabla.getSelectedRow(), 5)+"");
         p1.add(edCorreo);
 
         JLabel lbContrasena = new JLabel("Contraseña");
-        lbContrasena.setBounds(50, 380, 80, 50);
+        lbContrasena.setBounds(50, 250, 80, 50);
         p1.add(lbContrasena);
 
         JTextField edContrasena = new JTextField();
-        edContrasena.setBounds(150, 395, 200, 20);
+        edContrasena.setBounds(150, 265, 200, 20);
         edContrasena.setText(tabla.getValueAt(tabla.getSelectedRow(), 6)+"");
         p1.add(edContrasena);
 
         JLabel lbFechaIngreso = new JLabel("Fecha Ingreso");
-        lbFechaIngreso.setBounds(50, 440, 80, 50);
+        lbFechaIngreso.setBounds(50, 290, 100, 50);
         p1.add(lbFechaIngreso);
 
         JTextField edFechaIngreso = new JTextField();
-        edFechaIngreso.setBounds(150, 455, 200, 20);
+        edFechaIngreso.setBounds(150, 305, 200, 20);
 
         final var fechaIngreso = tabla.getValueAt(tabla.getSelectedRow(), 7);
         edFechaIngreso.setText(fechaIngreso != null ? fechaIngreso.toString() : "");
         p1.add(edFechaIngreso);
 
         JLabel lbFechaEgreso = new JLabel("Fecha Egreso");
-        lbFechaEgreso.setBounds(50, 500, 80, 50);
+        lbFechaEgreso.setBounds(50, 330, 80, 50);
         p1.add(lbFechaEgreso);
 
         JTextField edFechaEgreso = new JTextField();
-        edFechaEgreso.setBounds(150, 515, 200, 20);
+        edFechaEgreso.setBounds(150, 345, 200, 20);
 
         final var fechaEgreso = tabla.getValueAt(tabla.getSelectedRow(), 8);
         edFechaEgreso.setText(fechaEgreso != null ? fechaEgreso.toString() : "");
         p1.add(edFechaEgreso);
 
         JLabel lbRol = new JLabel("Rol");
-        lbRol.setBounds(50, 560, 80, 50);
+        lbRol.setBounds(50, 370, 80, 50);
         p1.add(lbRol);
 
         JTextField edRol = new JTextField();
-        edRol.setBounds(150, 575, 200, 20);
+        edRol.setBounds(150, 385, 200, 20);
 
         final var rol = tabla.getValueAt(tabla.getSelectedRow(), 9);
         edRol.setText(rol.toString());
         p1.add(edRol);
 
         JButton bttonActualizar = new JButton("Actualizar");
-        bttonActualizar.setBounds(150, 635, 120, 40);
+        bttonActualizar.setBounds(150, 425, 120, 40);
         p1.add(bttonActualizar);
 
         bttonActualizar.addActionListener(event -> {
